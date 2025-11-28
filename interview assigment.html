@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>World Famous Places</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    header, footer {
+        background: #222;
+        color: white;
+        padding: 15px;
+        font-size: 20px;
+    }
+
+    .container {
+        display: flex;
+        width: 80%;
+        margin: 40px auto;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    /* Left Half - Image */
+    .left {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .left img {
+        width: 350px;
+        height: 250px;
+        border-radius: 10px;
+    }
+
+    /* Right Half - Text */
+    .right {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    .text-box {
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        height: 40%;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        margin-top: 0;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 10px;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    World Famous Places
+</header>
+
+<div class="container">
+
+    <!-- IMAGE LEFT SIDE -->
+    <div class="left">
+        <img id="placeImage" src="">
+    </div>
+
+    <!-- TEXT RIGHT SIDE -->
+    <div class="right">
+
+        <div class="text-box">
+            <h3>Original Language</h3>
+            <p id="originalText">---</p>
+        </div>
+
+        <div class="text-box">
+            <h3>Translated Language</h3>
+            <p id="translatedText" style="display:none;">---</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Buttons -->
+<button onclick="prevContent()">Previous</button>
+<button onclick="nextContent()">Next</button>
+<button onclick="translateCurrent()">Translate</button>
+
+<footer>
+    Developed by Sai Krishna — Test held on 28 Nov 2025 @ 9:00AM–12:00PM IST
+</footer>
+
+
+<!-- JS -->
+<script>
+const data = [
+    {
+        original: "ताज महल",
+        translated: "Taj Mahal",
+        img: "https://upload.wikimedia.org/wikipedia/commons/d/da/Taj-Mahal.jpg"
+    },
+    {
+        original: "एफिल टॉवर",
+        translated: "Eiffel Tower",
+        img: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg"
+    },
+    {
+        original: "चीन की दीवार",
+        translated: "Great Wall of China",
+        img: "https://images.unsplash.com/photo-1608037521277-154cd1b89191?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z3JlYXQlMjB3YWxsJTIwb2YlMjBjaGluYXxlbnwwfHwwfHx8MA%3D%3D"
+    }
+];
+
+let index = 0;
+
+function updateContent() {
+    document.getElementById("originalText").innerText = data[index].original;
+
+    // hide translation
+    document.getElementById("translatedText").style.display = "none";
+
+    // update image
+    document.getElementById("placeImage").src = data[index].img;
+}
+
+
+// Next button
+function nextContent() {
+    index = (index + 1) % data.length;
+    
+
+    // Show new original only
+    updateContent();
+}
+
+
+// Previous button
+function prevContent() {
+    index = (index - 1 + data.length) % data.length;
+
+    // Show only original
+    updateContent();
+}
+function translateCurrent() {
+    document.getElementById("translatedText").innerText = data[index].translated;
+    document.getElementById("translatedText").style.display = "block";
+}
+
+
+// Load first item on page start
+updateContent();
+</script>
+
+</body>
+</html>
